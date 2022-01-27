@@ -1,7 +1,3 @@
-const OFF = 0;
-const WARN = 1;
-const ERROR = 2;
-
 module.exports = {
   env: {
     browser: true,
@@ -9,13 +5,13 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:react/recommended',
     'airbnb',
     'airbnb/hooks',
     'plugin:unicorn/recommended',
     'plugin:promise/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:react/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -28,7 +24,7 @@ module.exports = {
   plugins: ['react', 'unicorn', 'promise', '@typescript-eslint', 'prettier'],
   rules: {
     'import/extensions': [
-      ERROR,
+      'error',
       'ignorePackages',
       {
         ts: 'never',
@@ -37,11 +33,39 @@ module.exports = {
         js: 'never',
       },
     ],
-    'react/jsx-filename-extension': [ERROR, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/function-component-definition': [
-      OFF,
+      'error',
       {
-        namedComponents: 'function-declaration',
+        namedComponents: ['function-declaration', 'arrow-function'],
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    'react/react-in-jsx-scope': 'off',
+
+    'unicorn/prefer-node-protocol': 'off',
+    'unicorn/import-style': [
+      'error',
+      {
+        styles: {
+          util: false,
+          path: {
+            named: true,
+          },
+        },
+      },
+    ],
+
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      {
+        'ts-expect-error': 'allow-with-description',
+        'ts-ignore': 'allow-with-description',
+        'ts-nocheck': 'allow-with-description',
+        'ts-check': 'allow-with-description',
+        minimumDescriptionLength: 5,
       },
     ],
   },

@@ -2,5 +2,6 @@
 # ignore
 /node_modules
 /dist
+/config
 .eslintrc.js
 commitlint.config.js
